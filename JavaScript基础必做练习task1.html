@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task1</title>
+</head>
+
+<body>
+
+
+    <h3>污染城市列表</h3>
+    <ul id="aqi-list">
+
+    </ul>
+
+    <script type="text/javascript">
+        var aqiData = [
+            ["北京", 90],
+            ["上海", 50],
+            ["福州", 10],
+            ["广州", 50],
+            ["成都", 90],
+            ["西安", 100],
+            ["重庆", 100]
+        ];
+        var arr = new Array();
+
+        (function() {
+
+            for (var k in aqiData) {
+
+                for (var i = 0; i < aqiData[k].length; i++) {
+                    if (aqiData[k][i] > 60) {
+                        arr.push(aqiData[k]);
+                    }
+                }
+
+            }
+
+        })();
+        //比较几个城市大小
+        var mincity = [];
+        var min = [];
+        for (var i = 0; i < arr.length - 1; i++) {
+
+            if (arr[i][1] < arr[i + 1][1] || arr[i][1] == arr[i + 1][1]) {
+                mincity.push(arr[i][0]);
+                min.push(arr[i][1]);
+
+            } else {
+                mincity.push(arr[i + 1][0]);
+                min.push(arr[i + 1][1]);
+
+            }
+        }
+        mincity.push(arr[arr.length - 1][0]);
+        min.push(arr[arr.length - 1][1]);
+        var ul = document.querySelector('ul');
+        for (var i = arr.length - 1; i >= 0; i--) {
+            var li = document.createElement('li');
+            ul.appendChild(li);
+            li.innerHTML = '第' + (arr.length - i) + '名：' + mincity[i] + '  ' + min[i];
+        }
+    </script>
+
+</body>
+
+</html>
