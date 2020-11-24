@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task3</title>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+        
+        textarea {
+            margin-left: 20px;
+        }
+        
+        .box {
+            margin-left: 20px;
+            width: auto;
+            height: 200px;
+        }
+        
+        .box li {
+            float: left;
+            margin-right: 20px;
+            width: 100px;
+            height: 50px;
+            background-color: pink;
+            font-size: 30px;
+            list-style: none;
+            color: rgb(19, 18, 18);
+            text-align: center;
+            line-height: 50px;
+            padding: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <textarea name="" id="textarea" cols="30" rows="10">请输入字符并使用不同符号隔开</textarea>
+    <button>插入</button>
+    <button>查询</button>
+    <input type="text" name="text" id="text">
+    <ul class="box"></ul>
+    <script>
+        var box = document.querySelector('.box');
+        var btns = document.querySelectorAll('button');
+        btns[0].onclick = function() {
+            var inputText = document.querySelector('#textarea').value;
+            var input = inputText.match(/[^\s;:，。、；’',.//]+/g);
+            console.log(input);
+            let arr = [];
+            for (let i = 0; i <= input.length; i++) {
+                if (input[i] == null) {
+                    break;
+                }
+                arr.push(input[i]);
+                console.log(input);
+                var lis = document.createElement('li');
+                box.appendChild(lis);
+                lis.innerHTML = input[i];
+            }
+
+
+        }
+
+        btns[1].onclick = function() {
+            var inputText = document.querySelector('#text').value;
+            var reg2 = new RegExp(inputText, 'g');
+            for (let i = 0; i < box.children.length; i++) {
+                box.children[i].innerHTML = box.children[i].innerHTML.replace(reg2, search => {
+                    return `<span style = "
+                    color: red">${search}</span>`;
+                });
+            }
+        }
+    </script>
+
+</body>
+
+</html>
